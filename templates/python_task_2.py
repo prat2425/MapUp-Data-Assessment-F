@@ -11,9 +11,16 @@ def calculate_distance_matrix(df)->pd.DataFrame():
     Returns:
         pandas.DataFrame: Distance matrix
     """
-    # Write your logic here
+    #df=pd.read_csv(r'C:\Users\prate\OneDrive\Desktop\dataset-3.csv')
+df 
 
+import pandas as pd
+from scipy.spatial import distance_matrix
+
+def calculate_distance_matrix(df):
+    df=pd.DataFrame(distance_matrix(df.values, df.values), index=df.id_start, columns=df.id_start)
     return df
+
 
 
 def unroll_distance_matrix(df)->pd.DataFrame():
@@ -26,9 +33,14 @@ def unroll_distance_matrix(df)->pd.DataFrame():
     Returns:
         pandas.DataFrame: Unrolled DataFrame containing columns 'id_start', 'id_end', and 'distance'.
     """
-    # Write your logic here
+    # df=pd.read_csv(r'C:\Users\prate\OneDrive\Desktop\dataset-3.csv')
 
+    def unroll_distance_matrix(df):
+    df['distance']=df['distance'].cumsum()
+    df['id_start']=1001400
     return df
+    
+    unroll_distance_matrix(df)
 
 
 def find_ids_within_ten_percentage_threshold(df, reference_id)->pd.DataFrame():
@@ -58,10 +70,20 @@ def calculate_toll_rate(df)->pd.DataFrame():
     Returns:
         pandas.DataFrame
     """
-    # Wrie your logic here
+    # def calculate_toll_rate(df):
+    df['moto']=df['distance']*0.8
 
-    return df
+    df['car']=df['distance']*1.2
 
+    df['rv']=df['distance']*1.5
+
+    df['bus']=df['distance']*2.2
+    
+    df['truck']=df['distance']*3.6
+    
+    return(df)
+   calculate_toll_rate(df)
+here df is the output of question-2
 
 def calculate_time_based_toll_rates(df)->pd.DataFrame():
     """
@@ -73,6 +95,12 @@ def calculate_time_based_toll_rates(df)->pd.DataFrame():
     Returns:
         pandas.DataFrame
     """
-    # Write your logic here
-
+    # def calculate_time_based_toll_rates(df):
+    df['start_day']=pd.date_range(start='20-1-2023',end='1-3-2023',periods=44)
+    df['Start_Time']=df['start_day'].dt.hour
+    df['Start-dayy']=df['start_day'].dt.weekday.replace({0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thrusday',4:'Friday',5:'Saturday',6:'Sunday'})
+    df.drop(columns=['start_day','time'],axis=1,inplace=True)
     return df
+
+
+def calculate_time_based_toll_rates(df)
